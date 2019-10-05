@@ -1,0 +1,24 @@
+{
+  "name": "acme-schools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexpini/acme-schools.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexpini/acme-schools/issues"
+  },
+  "homepage": "https://github.com/alexpini/acme-schools#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
