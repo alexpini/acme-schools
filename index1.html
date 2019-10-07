@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.4/redux.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.1/react-router-dom.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js'></script>
+<style>
+body {
+  font-family: verdana;
+}
+nav {
+  display: flex;
+  justify-content: space-around;
+}
+a {
+  padding: 0.5rem;
+}
+.active {
+  background-color: tomato;
+  color: white;
+}
+</style>
+  </head>
+  <body>
+    <div id='root'></div>
+    <script type='text/babel'>
+
+      const connect = (Component)=> {
+        class Connected extends React.Component{
+          constructor(){
+            super();
+            this.state = store.getState();
+          }
+          componentWillUnmount(){
+            this.unsubscribe();
+          }
+          componentDidMount(){
+            this.unsubscribe = store.subscribe(() => this.setState(store.getState()));
+          }
+          render(){
+            return (
+              <Component {...this.state } {...this.props }/>
+            );
+          }
+        }
+        return Connected;
+      }
+
+      const Nav = ({events}) => {
+        const links = [
+          { text: 'EVENTS', to: '/events', count: events.length },
+          { text: 'HOME', to: '/home' }
+        ]
+        return (
+          <nav>
+            {
+              links.map( link => map)
+            }
+          </nav>
+        )
+      };
+
+      const Home = ({events}) => {
+        return (
+          <div>
+            <p> You've got {events.length} events! </p>
+          </div>
+        )
+      };
+
+
+      const Events = ({events}) =>{
+        return (
+          <div>
+          <button> Create </button>
+            <ul>
+              {
+                events.map(event =>
+                <li>{event.name} - {event.date}</li>)
+              }
+            </ul>
+          </div>
+        );
+      }
+
+      const {createStore, combineReducers} = Redux;
+      const { HashRouter, Link, Route } = ReactRouterDOM;
+
+      const reducer = combineReducers({
+        events: (state =[], action) =>{
+          if(action.type === 'SET_STUDENT'){
+            return action.event;
+          } else if (action.type === "CREATE_STUDENT"){
+            return [...state, action.event]
+          }
+          return state;
+        }
+      })
+
+      const store = createStore(reducer);
+
+      const loadStore = async ()=>{
+        const [events] = await (axios.get('./students')).data;
+      };
+
+      //sending student as req.body to server.js
+      const createEvent = async (student)=> {
+        const created = (await axios.post('/api/students', student)).data;
+        store.dispatch({ type: 'CREATE_STUDENT', student: created })
+      };
+      ​
+
+      Class App extends React.Component {
+        componentDidMount(){
+          fetchEvents();
+        }
+        render(){
+          return(
+            <HashRouter>
+              <H1>ACME Schools</H1>
+              <Route component = {connect(Nav)} />
+              <Route path = '/' component = {connect(Home)} exact />
+              <Route path = '/events' component = {connect(Events)} />
+            </HashRouter>
+          )
+        }
+      }
+
+ReactDOM.render(<App />, document.querySelector('#root'));
+
+      //ReactDOM.render(<App />, document.querySelector('#root'));
+
+    </script>
+  </body>
+</html>

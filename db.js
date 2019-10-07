@@ -3,12 +3,13 @@ const { STRING, UUID, UUIDV4 } = Sequelize;
 
 const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/my_db');
 
-const School = conn.define('school', {
+const School = conn.define('schools', {
   id: {
     type: UUID,
     defaultValue: UUIDV4,
     primaryKey: true
-  }
+  },
+  name: Sequelize.STRING
 });
 
 const Student = conn.define('students', {

@@ -15,6 +15,8 @@ const GET_ONE_STUDENT = 'GET_ONE_STUDENT';
 
 //action creators
 const setSchool = (school)=> ({ type: SET_SCHOOL, school });
-const setStudents = (students)=> ({ type: STUDENTS, students });
+const setStudents = (students)=> ({ type: SET_STUDENTS, students });
 const _createStudent = (student) => ({ type: CREATE_STUDENT, student});
-const _destroyStudent = (student)=> ({ type: DESTROY_STUDENT, student})
+const _destroyStudent = (student)=> ({ type: DESTROY_STUDENT, student});
+const _updateStudent = (student)=> ({ type: UPDATE_STUDENT, student});
+const _getOneStudent = (student)=> ({ type: GET_ONE_STUDENT, student });
