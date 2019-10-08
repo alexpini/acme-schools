@@ -39,6 +39,13 @@ router.get('/schools', async(req, res, next)=> {
   .catch(next);
 });
 
+//find all students
+router.get('/students', async(req, res, next)=> {
+  Student.findAll()
+  .then( students => res.send(students))
+  .catch(next);
+});
+
 //find one school
 router.get('/schools/:id', (req, res, next)=> {
   School.findByPk(req.params.id)
@@ -59,15 +66,14 @@ router.post('/students', (req, res, next)=> {
 });
 
 
-//delete a student
+//update school of a student
 
 router.put('/students/:id', (req, res, next)=> {
   Student.findbyPk(req.params.id)
   .then( student => {
-    student.schoolId = req.body.schoolId
-    console.log(student);
-    student.update()
-    student.save()
+    student.schoolId = req.body.schoolId;
+    student.update();
+    student.save();
   })
 });
 

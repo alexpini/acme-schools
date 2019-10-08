@@ -20,10 +20,12 @@ conn.sync({force: true})
   .then( async ()=> {
     // app.listen(3000);
 
-    const school1 = {name: 'Yale'}
-    const school = await School.create(school1)
+    const schools = [{name: 'Yale'}, {name: "Wisconsin"}, {name: "Brown"}]
+    const [yale, wisconsin, brown] = await Promise.all(schools.map(school => School.create(school)));
 
-    const student = {fullName: 'Cookie Monster', schoolId: school.id}
+
+
+    const student = {firstName: 'Cookie', lastName: 'Monster', schoolId: yale.id, email: 'cmonster@monster.net', gpa: 4.3}
     await Student.create(student)
 
 

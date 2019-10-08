@@ -9,8 +9,3 @@ module.exports = {
     ]
   }
 }
-
-export default connect(
-  //state function
-  //dispatch function
-)(Component)

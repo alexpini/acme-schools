@@ -22,7 +22,10 @@ const Student = conn.define('students', {
     type: UUID,
     // allowNull: false
   },
-  fullName: Sequelize.STRING
+  firstName: Sequelize.STRING,
+  lastName: Sequelize.STRING,
+  email: Sequelize.STRING,
+  gpa: Sequelize.DECIMAL
 });
 
 Student.belongsTo(School);
