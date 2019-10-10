@@ -2,16 +2,61 @@
   <head>
     <style>
       body {
-        font-family: verdana;
+        font-family: impact;
+        background-color: #dbe2fe;
+        -webkit-text-stroke-width: .25px;
+        -webkit-text-stroke-color:white;
+        color:black;
+        padding: 2rem;
       }
       nav {
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-around;
         padding: 1rem;
+      }
+      a {
+        -webkit-text-stroke-width: .25px;
+        -webkit-text-stroke-color: #e64a2b;
+        font-size: 1rem;
+        text-decoration: none;
+        color: #e64a2b;
+      }
+      a:focus {
+        text-decoration: line-through;
+        -webkit-text-stroke-width: 1.5px;
+        color: transparent;
+      }
+      a:hover {
+        font-size: 1.5rem;
       }
       form {
         display: flex;
         flex-direction: column;
+        margin: 2rem;
+        align-items: center;
+      }
+      #flex{
+        display: flex;
+        flex-direction: column;
+        border-radius: 2rem;
+        border: solid 1px black;
+        align-items:center;
+        justify-content: space-around;
+        margin: 1rem;
+        background-color:white;
+      }
+      li {
+        display: flex;
+        flex-direction: row;
+        padding: 1rem;
+      }
+      input, button {
+        height: 2rem;
+        font-size: 1rem;
+        margin: .5rem;
+        background-color: white;
+        border-radius: 25px;
+        font: impact;
       }
     </style>
 

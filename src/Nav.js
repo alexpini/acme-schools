@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { mostPopular, topSchool } from '../utility';
 
 const _Nav = ({ schools, students })=> {
   // const mostPopular = schools.filter( student => )
@@ -9,8 +10,9 @@ const _Nav = ({ schools, students })=> {
   return (
     <div>
       <nav>
-        <Link to='/schools'>Schools</Link>
-        <Link to='/students'>Students</Link>
+      <Link className='home' to='/'>Acme Schools</Link>
+        <Link to='/schools'>Schools { schools.length }</Link>
+        <Link to='/students'>Students { students.length }</Link>
         <Link to='/schools/:id'>Most Popular </Link>
         <Link to='/schools/:id'>Top School </Link>
       </nav>

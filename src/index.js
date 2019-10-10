@@ -2,14 +2,22 @@ import React from 'react'
 import {render} from 'react-dom'
 import { HashRouter, Link, Route, Switch } from 'react-router-dom'
 import { Provider, connect } from 'react-redux'
-import store, { createStudent } from './store'
+import store, { createStudent, getStudents, getSchools } from './store'
 import Nav from './Nav'
 import Schools from './Schools'
 import Students from './Students'
 
+
 const { Component } = React;
 
-class App extends React.Component {
+class _App extends Component {
+  constructor() {
+    super();
+  }
+  componentDidMount() {
+    this.props.getStudents();
+    this.props.getSchools();
+  }
   render() {
     return (
       <div>
@@ -35,6 +43,8 @@ class _Nav extends Component{
     );
   }
  }
+
+
 
  class _UserForm extends Component{
    constructor() {
@@ -74,17 +84,31 @@ class _Nav extends Component{
          <label>
            GPA: <input type = 'decimal' name = 'gpa' required onChange = {onChange}></input>
          </label>
-         <button type = 'submit' onClick={createStudent}>Save</button>
+         <button type = 'submit' onClick={createStudent}>SAVE</button>
        </form>
      )
    }
  }
 
- const mapDispatchToProps = {
-   create: createStudent
+
+
+
+
+
+
+
+
+ const mapDispatchToProps = (dispatch) => {
+   return {
+      create: () => dispatch(createStudent()),
+      getStudents: () => dispatch(getStudents()),
+      getSchools: () => dispatch(getSchools())
+    }
  }
 
  const UserForm = connect(null, mapDispatchToProps)(_UserForm)
+
+ const App = connect(null, mapDispatchToProps)(_App)
 
 render(<Provider store={store}><HashRouter><App /> </HashRouter></Provider>, document.getElementById('root'))
 

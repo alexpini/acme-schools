@@ -1,8 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getSchools } from './store';
+import { getStudents } from './store';
+import { studentCount } from '../utility';
 
-class _Schools extends React.Component {
+const { Component } = React;
+
+class _Schools extends Component {
   constructor() {
     super();
   }
@@ -10,8 +14,7 @@ class _Schools extends React.Component {
     await this.props.getSchools()
   }
   render() {
-    const {schools} = this.props
-    console.log(schools)
+    const {schools, students} = this.props
     return (
       <div>
         <ul>
@@ -19,22 +22,29 @@ class _Schools extends React.Component {
             schools.map( school => {
               return (
                 <div>
-                  <div>{school.name}</div>
-                  <div>{school.name}</div>
+                  <div id='flex'>
+                    <li>{school.name}</li>
+                    <li>Student Count { studentCount(schools, students) }</li>
+                  </div>
                 </div>
-              )
+              );
             })
           }
         </ul>
       </div>
-    )
-  }
-}
+    );
+  };
+};
+
+
+
+
 
 const mapStateToProps = ({ schools, students })=> ({ schools, students });
 
 const mapDispatchToProps = {
-  getSchools: getSchools
+  getSchools: getSchools,
+  getStudents: getStudents
 }
 
 const Schools = connect(mapStateToProps, mapDispatchToProps)(_Schools);

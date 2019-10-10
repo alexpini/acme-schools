@@ -23,7 +23,6 @@ const _updateStudent = (student)=> ({ type: UPDATE_STUDENT, student});
 const getSchools = ()=> {
   return async(dispatch, getState)=> {
     const schools = (await axios.get(`${API}/schools`)).data;
-    console.log(schools);
     dispatch(setSchool(schools))
   }
 };

@@ -24,8 +24,16 @@ const Student = conn.define('students', {
   },
   firstName: Sequelize.STRING,
   lastName: Sequelize.STRING,
-  email: Sequelize.STRING,
-  gpa: Sequelize.DECIMAL
+  email: {
+    type: Sequelize.STRING,
+    validate: {
+      isEmail: {
+        msg: 'Email address must be valid'
+      }
+    }
+  },
+  gpa: Sequelize.DECIMAL,
+  url: Sequelize.STRING
 });
 
 Student.belongsTo(School);

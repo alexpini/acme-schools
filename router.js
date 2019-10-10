@@ -33,14 +33,14 @@ router.get('/schools/:id/students', async(req, res, next)=> {
 
 
 //find all schools
-router.get('/schools', async(req, res, next)=> {
+router.get('/schools', (req, res, next)=> {
   School.findAll()
   .then( schools => res.send(schools))
   .catch(next);
 });
 
 //find all students
-router.get('/students', async(req, res, next)=> {
+router.get('/students', (req, res, next)=> {
   Student.findAll()
   .then( students => res.send(students))
   .catch(next);
@@ -78,12 +78,19 @@ router.put('/students/:id', (req, res, next)=> {
 });
 
 //delete a student
-router.delete('/schools/:studentId/students/:id', (req, res, next)=> {
-  Student.findByPk(req.params.id)
-  .then( student => student.destroy())
-  .then( ()=> res.sendStatus(204))
-  .catch(next);
+router.delete('/students/:id', (req, res, next)=> {
+  Student.destroy({ where: { id: req.params.id }})
+  .then( () => res.sendStatus(204))
+  .catch(next)
+
 });
+
+// router.delete('students/:id', (req, res, next)=> {
+//   Student.findByPk(req.params.id)
+//   .then( student => student.destroy())
+//   .then( ()=> res.sendStatus(204))
+//   .catch(next);
+// });
 
 // app.use((err, req, res, next)=> {
 //   res.status(err.status || 500).send({ message: err.message });
